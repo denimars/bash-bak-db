@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"dbbak/util"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"time"
 )
 
@@ -50,4 +52,46 @@ func main() {
 	}
 
 	fmt.Printf("Backup successful! File created: %s\n", backupFilename)
+
+	// Ensure the dbbak folder exists
+	dbbakFolder := "dbbak"
+	err = os.MkdirAll(dbbakFolder, os.ModePerm)
+	if err != nil {
+		fmt.Println("Error creating dbbak folder:", err)
+		return
+	}
+
+	// Define the destination file path
+	destPath := filepath.Join(dbbakFolder, backupFilename)
+
+	// Copy the backup file to the dbbak folder
+	err = copyFile(backupFilename, destPath)
+	if err != nil {
+		fmt.Println("Error copying file to dbbak folder:", err)
+		return
+	}
+
+	fmt.Printf("Backup copied to %s successfully!\n", destPath)
+}
+
+// copyFile copies a file from src to dst
+func copyFile(src, dst string) error {
+	sourceFile, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer sourceFile.Close()
+
+	destinationFile, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer destinationFile.Close()
+
+	_, err = io.Copy(destinationFile, sourceFile)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
