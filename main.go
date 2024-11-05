@@ -10,9 +10,9 @@ import (
 
 func main() {
 	// Database credentials
-	dbName := "sipaham2"              // Replace with your database name
-	dbUser := "root"                  // Replace with your MySQL username
-	dbPassword := "ayambakarkecap212" // Replace with your MySQL password
+	dbName := "blablabla"        // Replace with your database name
+	dbUser := "blablabla"        // Replace with your MySQL username
+	dbPassword := "arstartsarts" // Replace with your MySQL password
 
 	// Create a timestamp in the format sipaham<year><month><date><hour><minute>
 	timestamp := time.Now().Format("200601021504") // YYYYMMDDHHMM
