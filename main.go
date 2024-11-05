@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"dbbak/util"
 	"fmt"
 	"os"
 	"os/exec"
@@ -9,10 +10,11 @@ import (
 )
 
 func main() {
+	util.LoadEnv()
 	// Database credentials
-	dbName := "blablabla"        // Replace with your database name
-	dbUser := "blablabla"        // Replace with your MySQL username
-	dbPassword := "arstartsarts" // Replace with your MySQL password
+	dbName := os.Getenv("DB_NAME")         // Replace with your database name
+	dbUser := os.Getenv("DB_USER")         // Replace with your MySQL username
+	dbPassword := os.Getenv("DB_PASSWORD") // Replace with your MySQL password
 
 	// Create a timestamp in the format sipaham<year><month><date><hour><minute>
 	timestamp := time.Now().Format("200601021504") // YYYYMMDDHHMM
