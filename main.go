@@ -53,7 +53,7 @@ func main() {
 	fmt.Printf("Backup successful! File created: %s\n", backupFilename)
 
 	// Ensure the dbbak folder exists
-	dbbakFolder := "dbbak"
+	dbbakFolder := os.Getenv("DB_BAK_FOLDER")
 	err = os.MkdirAll(dbbakFolder, os.ModePerm)
 	if err != nil {
 		fmt.Println("Error creating dbbak folder:", err)
