@@ -1,0 +1,5 @@
+database:
+  - db_name: arsarst
+    db_password: arstarst
+    db_user: roarstarstot
+db_bak_folder: /arstarts

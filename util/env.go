@@ -2,11 +2,26 @@ package util
 
 import (
 	"fmt"
+	"os"
 
-	"github.com/joho/godotenv"
+	"gopkg.in/yaml.v3"
 )
 
-func LoadEnv() {
+func LoadEnv() (Config, bool) {
 	location := location()
-	godotenv.Load(fmt.Sprintf("%v/%v", location, ".env"))
+	fmt.Println(location)
+	var config Config
+	data, err := os.ReadFile(fmt.Sprintf("%v/%v", location, "config.yaml"))
+	if err != nil {
+		fmt.Println(err)
+		return config, false
+	}
+
+	err = yaml.Unmarshal(data, &config)
+	if err != nil {
+		fmt.Println(err)
+		return config, false
+	}
+	return config, true
+
 }
