@@ -7,7 +7,8 @@ type Database struct {
 }
 
 type Data struct {
-	Location string `yaml:"location"`
+	From string `yaml:"from"`
+	To   string `yaml:"to"`
 }
 
 type Config struct {

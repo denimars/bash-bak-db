@@ -1,7 +1,8 @@
 database:
-  - db_name: sipaham
-    db_password: ayambakarkecap212
-    db_user: root
+  - db_name:
+    db_password:
+    db_user:
 data:
-  - location: /Users/denimarswandi/sumbawa
-db_bak_folder: /Users/denimarswandi/project/sipaham/db-bak-bash/dbbak
+  - from:
+    to:
+db_bak_folder:
