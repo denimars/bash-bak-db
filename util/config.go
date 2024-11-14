@@ -6,7 +6,12 @@ type Database struct {
 	DbUser     string `yaml:"db_user"`
 }
 
+type Data struct {
+	Location string `yaml:"location"`
+}
+
 type Config struct {
 	Database    []Database `yaml:"database"`
 	DbBakFolder string     `yaml:"db_bak_folder"`
+	Data        []Data     `yaml:"data"`
 }
