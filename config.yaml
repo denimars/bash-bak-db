@@ -1,8 +1,5 @@
 database:
-  - db_name:
-    db_password:
-    db_user:
-data:
-  - from:
-    to:
-db_bak_folder:
+  - db_name: pos
+    db_password: ayambakarkecap212
+    db_user: root
+db_bak_folder: dbbak

@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func location() string {
+func Location() string {
 	var dir string
 	executable, _ := os.Executable()
 	if strings.Contains(executable, os.TempDir()) {

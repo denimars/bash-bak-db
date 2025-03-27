@@ -6,13 +6,7 @@ type Database struct {
 	DbUser     string `yaml:"db_user"`
 }
 
-type Data struct {
-	From string `yaml:"from"`
-	To   string `yaml:"to"`
-}
-
 type Config struct {
 	Database    []Database `yaml:"database"`
 	DbBakFolder string     `yaml:"db_bak_folder"`
-	Data        []Data     `yaml:"data"`
 }
