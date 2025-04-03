@@ -109,6 +109,4 @@ func main() {
 	config, status := util.LoadEnv()
 	db(config, status)
 	deleteBak(config)
-	path := fmt.Sprintf("%v/%v", util.Location(), config.DbBakFolder)
-	fmt.Println(path)
 }
