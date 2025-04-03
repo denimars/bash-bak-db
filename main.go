@@ -54,7 +54,48 @@ func db(config util.Config, status bool) {
 
 }
 
+func splitDate(fileName string) (time.Time, string) {
+	isCollect := false
+	dateOnString := ""
+	for i := len(fileName) - 1; i >= 0; i-- {
+		if isCollect {
+			if util.IsNumeric(string(fileName[i])) {
+				dateOnString = string(fileName[i]) + dateOnString
+			} else {
+				isCollect = false
+			}
+
+		}
+		if fileName[i] == '.' && !isCollect {
+			isCollect = true
+		}
+
+	}
+	fmt.Println(dateOnString)
+	return time.Now(), dateOnString
+}
+
+func deleteBak(config util.Config) {
+	var err error
+	var files []os.DirEntry
+	path := fmt.Sprintf("%v/%v", util.Location(), config.DbBakFolder)
+	if files, err = os.ReadDir(path); err == nil {
+		for _, file := range files {
+			if !file.IsDir() {
+				splitDate(file.Name())
+				// fmt.Println(dateOnString)
+				fmt.Println("----")
+			}
+		}
+	} else {
+		fmt.Println(err)
+	}
+
+}
+
 func main() {
-	config, status := util.LoadEnv()
-	db(config, status)
+	config, _ := util.LoadEnv()
+	// config, status := util.LoadEnv()
+	// db(config, status)
+	deleteBak(config)
 }
