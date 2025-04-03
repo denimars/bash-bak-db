@@ -9,7 +9,6 @@ import (
 
 func LoadEnv() (Config, bool) {
 	location := Location()
-	fmt.Println(location)
 	var config Config
 	data, err := os.ReadFile(fmt.Sprintf("%v/%v", location, "config.yaml"))
 	if err != nil {
