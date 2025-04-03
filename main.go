@@ -42,7 +42,7 @@ func db(config util.Config, status bool) {
 				fmt.Println("Error creating dbbak folder:", err)
 				return
 			}
-			destPath := filepath.Join(dbbakFolder, backupFilename)
+			destPath := filepath.Join(finalLocation, backupFilename)
 			err = os.Rename(backupFilename, destPath)
 			if err != nil {
 				fmt.Println("Error moving file to dbbak folder:", err)
@@ -81,9 +81,6 @@ func deleteBak(config util.Config) {
 	var err error
 	var files []os.DirEntry
 	path := fmt.Sprintf("%v/%v", util.Location(), config.DbBakFolder)
-	fmt.Println("------")
-	fmt.Println(path)
-	fmt.Println("------")
 	if files, err = os.ReadDir(path); err == nil {
 		for _, file := range files {
 			if !file.IsDir() {
