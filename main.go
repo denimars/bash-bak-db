@@ -54,7 +54,7 @@ func db(config util.Config, status bool) {
 
 }
 
-func splitDate(fileName string) (time.Time, string) {
+func splitDate(fileName string) (time.Time, bool) {
 	isCollect := false
 	dateOnString := ""
 	for i := len(fileName) - 1; i >= 0; i-- {
@@ -71,8 +71,10 @@ func splitDate(fileName string) (time.Time, string) {
 		}
 
 	}
-	fmt.Println(dateOnString)
-	return time.Now(), dateOnString
+	if dateOnString != "" {
+		return util.ToDateTime(dateOnString, false), true
+	}
+	return util.ToDateTime(dateOnString, false), false
 }
 
 func deleteBak(config util.Config) {
@@ -82,9 +84,15 @@ func deleteBak(config util.Config) {
 	if files, err = os.ReadDir(path); err == nil {
 		for _, file := range files {
 			if !file.IsDir() {
-				splitDate(file.Name())
-				// fmt.Println(dateOnString)
-				fmt.Println("----")
+				date_, status := splitDate(file.Name())
+				if status {
+					if !util.CompareDate(date_) {
+						if err = os.Remove(fmt.Sprintf("%v/%v", path, file.Name())); err != nil {
+							fmt.Println("delete file: ", file.Name())
+						}
+					}
+
+				}
 			}
 		}
 	} else {
@@ -94,8 +102,8 @@ func deleteBak(config util.Config) {
 }
 
 func main() {
-	config, _ := util.LoadEnv()
-	// config, status := util.LoadEnv()
-	// db(config, status)
+	// config, _ := util.LoadEnv()
+	config, status := util.LoadEnv()
+	db(config, status)
 	deleteBak(config)
 }
