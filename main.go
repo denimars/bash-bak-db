@@ -86,7 +86,7 @@ func deleteBak(config util.Config) {
 			if !file.IsDir() {
 				date_, status := splitDate(file.Name())
 				if status {
-					if !util.CompareDate(date_) {
+					if !util.CompareDate(config.MaxTime, date_) {
 						if err = os.Remove(fmt.Sprintf("%v/%v", path, file.Name())); err == nil {
 							fmt.Println("delete file: ", file.Name())
 						}

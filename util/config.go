@@ -9,4 +9,5 @@ type Database struct {
 type Config struct {
 	Database    []Database `yaml:"database"`
 	DbBakFolder string     `yaml:"db_bak_folder"`
+	MaxTime     int        `yaml:"max_time"`
 }

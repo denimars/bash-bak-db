@@ -28,13 +28,14 @@ func ToDateTime(time_ string, withDash bool) time.Time {
 	return t
 }
 
-func CompareDate(fileTime time.Time) bool {
+func CompareDate(bottomTime_ int, fileTime time.Time) bool {
 	now := time.Now()
-	d30 := now.Add(-time.Hour * 30 * 24)
 	stringNow := fmt.Sprintf("%v 23:59:59", now.Format(formatDate))
-	d30StringNow := fmt.Sprintf("%v 00:00:00", d30.Format(formatDate))
-	if ToDateTime(d30StringNow, true).Before(fileTime) && ToDateTime(stringNow, true).After(fileTime) {
+	bottomTime := now.Add(-time.Hour * time.Duration(bottomTime_) * 24)
+	bottomTimeString := fmt.Sprintf("%v 00:00:00", bottomTime.Format(formatDate))
+	if ToDateTime(bottomTimeString, true).Before(fileTime) && ToDateTime(stringNow, true).After(fileTime) {
 		return true
 	}
+
 	return false
 }

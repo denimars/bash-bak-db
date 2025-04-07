@@ -3,3 +3,4 @@ database:
     db_password: ayambakarkecap212
     db_user: root
 db_bak_folder: dbbak
+max_time: 30
